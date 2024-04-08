@@ -1,0 +1,81 @@
+# ----------------------------------------------------------------------------------
+# PROJECT CONFIGURATION
+# ----------------------------------------------------------------------------------
+[tool.poetry]
+name = "coding-challenges"
+version = "0.1.0"
+description = "An assortment of coding challenges and solutions in Python."
+authors = ["Jack Hilton <jackhilton8@hotmail.co.uk>"]
+readme = "README.md"
+
+# ----------------------------------------------------------------------------------
+# DEPENDENCY CONFIGURATION
+# ----------------------------------------------------------------------------------
+[tool.poetry.dependencies]
+python = "^3.11.8"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.4"
+mypy = "^1.7.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.1.1"
+coverage = "^7.4.4"
+
+# ----------------------------------------------------------------------------------
+# RUFF CONFIGURATION
+# ----------------------------------------------------------------------------------
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/
+select = ["E4", "E7", "E9", "F", "I", "T20", "W2", "N"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ----------------------------------------------------------------------------------
+# TESTING CONFIGURATION
+# ----------------------------------------------------------------------------------
+[tool.coverage.run]
+branch = true
+command_line = "-m pytest -vv"
+source = ["src"]
+omit = [
+    "./venv/*",
+    "*tests*",
+    "*apps.py",
+    "*manage.py",
+    "*__init__.py",
+    "*migrations*",
+    "*asgi*",
+    "*wsgi*",
+    "*admin.py",
+    "*urls.py",
+]
+
+[tool.coverage.report]
+omit = [
+    "./venv/*",
+    "*tests*",
+    "*apps.py",
+    "*manage.py",
+    "*__init__.py",
+    "*migrations*",
+    "*asgi*",
+    "*wsgi*",
+    "*admin.py",
+    "*urls.py",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "*_test.py", "tests/*.py"]

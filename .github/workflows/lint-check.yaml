@@ -1,0 +1,14 @@
+name: Lint Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    name: ruff
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chartboost/ruff-action@v1

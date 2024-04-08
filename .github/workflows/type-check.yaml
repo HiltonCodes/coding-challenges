@@ -1,0 +1,25 @@
+name: Type Check
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: mypy
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        run: pipx install poetry==1.7.1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install Dependencies
+        run: |
+          poetry env use 3.11
+          poetry install --no-interaction --no-ansi --no-root
+      - name: Mypy Check
+        run: |
+          source $(poetry env info --path)/bin/activate
+          mypy src --namespace-packages
